@@ -6,22 +6,20 @@ const Body = Matter.Body;
 const Render = Matter.Render;
 var dustbinObj,groundObject	
 var world;
-var paperball 
+var paperball;
 
 
 function setup() {
 	createCanvas(1600, 700);
 	rectMode(CENTER);
-	
-	
 
 
 	engine = Engine.create();
 	world = engine.world;
 	
-	groundObject=new ground(width/2,670,width,20);
-	dustbinObj=new dustbin(1200,650);
-	paperball=new Paperball(200,600,50,50)
+	groundObject=new Ground(width/2,670,width,20);
+	dustbinObj=new Dustbin(1200,650);
+	paperball=new Paper(100,650,20);
 
 	Engine.run(engine);
   
@@ -36,6 +34,10 @@ function draw() {
   groundObject.display();
   dustbinObj.display();
   paperball.display();
-
 }
 
+function keyPressed(){
+	if(keyCode===UP_ARROW){
+		Matter.Body.applyForce(paperball.body,paperball.body.position,{x:100,y:-100})
+	}
+}
